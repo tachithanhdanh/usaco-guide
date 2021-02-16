@@ -7,6 +7,16 @@ frequency: 4
 ---
 
 export const problems = {
+	sample: [
+		new Problem(
+			'CF',
+			'Maximum Distance',
+			'https://codeforces.com/gym/102951/problem/A',
+			'Easy',
+			false,
+			[]
+		),
+	],
 	probs: [
 		new Problem(
 			'Bronze',
@@ -14,7 +24,7 @@ export const problems = {
 			'615',
 			'Easy',
 			false,
-			['Nested Loop'],
+			['Complete Search'],
 			'usaco-615'
 		), // 99.71
 		new Problem(
@@ -23,7 +33,7 @@ export const problems = {
 			'639',
 			'Easy',
 			false,
-			['Nested Loop'],
+			['Complete Search'],
 			'usaco-639'
 		), // 99.9
 		new Problem(
@@ -32,16 +42,16 @@ export const problems = {
 			'1060',
 			'Easy',
 			false,
-			['Nested Loop'],
+			['Complete Search'],
 			'usaco-1060'
 		), // 99.9
 		new Problem(
-			'Bronze', 
-			'Cow Gymnastics', 
-			'963', 
-			'Normal', 
-			true, 
-			['Nested Loop'], 
+			'Bronze',
+			'Cow Gymnastics',
+			'963',
+			'Normal',
+			true,
+			['Complete Search'],
 			'usaco-963'
 		), // 99.93
 		new Problem(
@@ -50,7 +60,7 @@ export const problems = {
 			'736',
 			'Normal',
 			true,
-			['Nested Loop'],
+			['Complete Search'],
 			'Loop over each position. Then, loop over each non-spotty cow in a nested loop and check whether a spotty cow has the same character as a non-spotty cow to figure out whether the position explains spottiness.'
 		), // 99.73
 		new Problem(
@@ -59,8 +69,8 @@ export const problems = {
 			'1011',
 			'Normal',
 			false,
-			[],
-			'Brute force all possible right triangles by looping over all triples of points and checking whether they form a right triangle. If so, compute the area and find the maximum over all right triangles.'
+			['Complete Search'],
+			'usaco-1011'
 		), // 98.02
 		new Problem(
 			'Bronze',
@@ -68,18 +78,34 @@ export const problems = {
 			'784',
 			'Normal',
 			false,
-			[],
+			['Complete Search'],
 			'usaco-784'
 		), // 98.76
-		new Problem('Bronze', 'Why Did the Cow Cross the Road II', '712', 'Normal', true, ['Nested Loop'], 'usaco-712'), // 89.6
-		new Problem('Bronze', 'Guess the Animal', '893', 'Hard',false, [], ''),
+		new Problem(
+			'Bronze',
+			'Why Did the Cow Cross the Road II',
+			'712',
+			'Normal',
+			true,
+			['Complete Search'],
+			'usaco-712'
+		), // 89.6
+		new Problem(
+			'Bronze',
+			'Guess the Animal',
+			'893',
+			'Hard',
+			false,
+			['Complete Search'],
+			''
+		),
 		new Problem(
 			'Silver',
 			'Bovine Genomics',
 			'739',
 			'Hard',
 			true,
-			['Nested Loop'],
+			['Complete Search'],
 			'Loop over each position. Then, loop over each non-spotty cow in a nested loop and check whether a spotty cow has the same character as a non-spotty cow to figure out whether the position explains spottiness.'
 		), // 99.73
 		new Problem(
@@ -88,27 +114,51 @@ export const problems = {
 			'617',
 			'Hard',
 			true,
-			[],
-			'Observe that a lot of placements of vertical or horizontal fences are equivalent. Specifically, a fence should be adjacent to a cow, so loop over all $N ^ 2$ unique placements of a vertical and horizontal fence. This idea is similar to Coordinate Compression.'
+			['Complete Search'],
+			'usaco-617'
 		), // 82.79
-		new Problem('Bronze', 'Contaminated Milk', '569', 'Very Hard', false, [], 'usaco-569'),
-		new Problem('Bronze', 'Cowntact Tracing', '1037', 'Very Hard', true, [], ''),
+		new Problem(
+			'Bronze',
+			'Contaminated Milk',
+			'569',
+			'Very Hard',
+			false,
+			['Complete Search'],
+			'usaco-569'
+		),
+		new Problem(
+			'Bronze',
+			'Cowntact Tracing',
+			'1037',
+			'Very Hard',
+			true,
+			['Complete Search'],
+			''
+		),
 		new Problem(
 			'Bronze',
 			'Bull in a China Shop',
 			'640',
 			'Very Hard',
 			false,
-			[],
+			['Complete Search'],
 			'Brute force all possible pairs of figurines and all possible ways to shift vertically / horizontally. This requires $6$ nested for loops, and is not very fun to implement. Good luck :)'
 		), // 47.38
-		new Problem('Silver', 'Load Balancing', '619', 'Very Hard', false, [], 'usaco-619'),
+		new Problem(
+			'Silver',
+			'Load Balancing',
+			'619',
+			'Very Hard',
+			false,
+			['Complete Search'],
+			'usaco-619'
+		),
 	],
 };
 
-<!-- new Problem("Bronze", "Field Reduction", "641", "Hard", false, [], "Hint: For this problem, you can't do a full complete search; you have to do a reduced search."), // 91.75 -->
+<!-- new Problem("Bronze", "Field Reduction", "641", "Hard", false, ['Complete Search'], "Hint: For this problem, you can't do a full complete search; you have to do a reduced search."), // 91.75 -->
 
-<!-- new Problem("Silver", "Field Reduction", "642", "Very Hard", false, [], ""), -->
+<!-- new Problem("Silver", "Field Reduction", "642", "Very Hard", false, ['Complete Search'], ""), -->
 
 <Resources>
 	<Resource source="IUSACO" title="6 - Complete Search">
@@ -120,25 +170,11 @@ export const problems = {
 
 In many problems (especially in Bronze) it suffices to check all possible cases in the solution space, whether it be all elements, all pairs of elements, or all subsets, or all permutations. Unsurprisingly, this is called **complete search** (or **brute force**), because it completely searches the entire solution space.
 
-## Example
-
-You are given $N$ $(3 \leq N \leq 5000)$ integer points on the coordinate plane. Find the square of the maximum Euclidean distance (aka length of the straight line) between any two of the points.
-
-### Input Format
-
-The first line contains an integer $N$.
-
-The second line contains $N$ integers, the $x$-coordinates of the points: $x_1, x_2, \dots, x_N$ ($-1000 \leq x_i \leq 1000$).
-
-The third line contains $N$ integers, the $y$-coordinates of the points: $y_1, y_2, \dots, y_N$ ($-1000 \leq y_i \leq 1000$).
-
-### Output Format
-
-Print one integer, the square of the maximum Euclidean distance between any two of the points.
+<FocusProblem problem={problems.sample[0]} />
 
 <Spoiler title="Solution">
 
-We can brute-force every pair of points and find the square of the distance between them, by squaring the formula for Euclidean distance: $\text{distance}^2 = (x_2-x_1)^2 + (y_2-y_1)^2$. Thus, we store the coordinates in arrays `X[]` and `Y[]`, such that `X[i]` and `Y[i]` are the $x$- and $y$-coordinates of the $i_{th}$ point, respectively. Then, we iterate through all possible pairs of points, using a variable max to store the maximum square of distance between any pair seen so far, and if the square of the distance between a pair is greater than our current maximum, we set our current maximum to it.
+We can brute-force every pair of points and find the square of the distance between them, by squaring the formula for Euclidean distance: $\text{distance}^2 = (x_2-x_1)^2 + (y_2-y_1)^2$. Thus, we store the coordinates in arrays `X['Complete Search']` and `Y['Complete Search']`, such that `X[i]` and `Y[i]` are the $x$- and $y$-coordinates of the $i_{th}$ point, respectively. Then, we iterate through all possible pairs of points, using a variable max to store the maximum square of distance between any pair seen so far, and if the square of the distance between a pair is greater than our current maximum, we set our current maximum to it.
 
 <LanguageSection>
 

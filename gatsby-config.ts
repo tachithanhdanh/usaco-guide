@@ -91,7 +91,9 @@ export const plugins = [
     resolve: `gatsby-plugin-postcss`,
     options: {
       postCssPlugins: [
+        require('postcss-import'),
         require(`tailwindcss`),
+        require('postcss-nested'),
         require(`autoprefixer`),
         ...(process.env.NODE_ENV === `production` ? [require(`cssnano`)] : []),
       ],
@@ -154,6 +156,7 @@ export const plugins = [
       sv: 6,
     },
   },
+  `gatsby-plugin-meta-redirect`,
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.dev/offline
   // `gatsby-plugin-offline`,
